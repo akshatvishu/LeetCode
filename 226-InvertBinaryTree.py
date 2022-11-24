@@ -28,4 +28,18 @@ class Solution:
 
 
 
-##
+## A better way to write
+# Post-Order
+# class Solution:
+#     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+#         if root:
+#             invert = self.invertTree
+#             root.left,root.right = invert(root.right), invert(root.left)
+#             return root 
+# Pre-order 
+# if not root:
+#     return root
+# root.left, root.right = root.right, root.left
+# self.invertTree(root.left)
+# self.invertTree(root.right)
+# return root
