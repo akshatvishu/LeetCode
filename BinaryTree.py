@@ -1,4 +1,5 @@
 ## Binary Tree
+from typing import *
 
 class BinaryTreeNode:
     def __init__(self,data) :
@@ -6,51 +7,44 @@ class BinaryTreeNode:
         self.left_child = None
         self.right_child = None 
 
-def insert(root, newValue) :
-    if root is None:
-        root = BinaryTreeNode(newValue)
-        return root 
-    if newValue < root.data:
-        root.left_child = insert(root.left_child, newValue)
-    else:
-        root.right_child = insert (root.right_child, newValue)
-    return root 
+## O(n) -> no of nodes in the tree and we have to do this opertation n times thus, O(n^2)
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 
+## O(n^2)##
+class Solution:
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        if root == None: 
+            return True
+        left = self.height(root.left)
+        right = self.height(root.right)
+        if(abs(left - right)>1):
+            return False
+        
+        return (self.isBalanced(root.left) and self.isBalanced(root.right))
 
-def height(root):
-    if root == None:
-        return 0
-    height_left_sub_tree = height(root.left_child)
-    height_right_sub_tree = height(root.right_child)
+    def height(self,root):
+        if root == None :
+            return 0
 
-    if height_left_sub_tree > height_right_sub_tree:
-        return height_left_sub_tree + 1
-    else:
-        return height_right_sub_tree + 1
+        left_height = self.height(root.right)
+        right_height = self.height(root.left)
 
-def BalancedBTree(root):
-    if root == None:
-        return True,0
-    left_height = height(root.left_child)
-    right_height = height(root.right_child)
+        return max(left_height,right_height)+1
 
-    if(abs(left_height - right_height)>1):
-        return False
+##Worst case (if tree is completely imbalanced), the space complexity would be O(N). Worst-case time complexity of O(N)/space-complexity is O(max height of tree
+#  DFS the tree and recursively check if each subtree is balanced -> O(N)
+def check(node):
+    if node == None:
+        return(0,True)
+    
+    l_height, l_balanced = check(node.left)
+    r_height, r_balanced = check(node.right)
+    return max(l_height + r_height)+1, l_balanced and r_balanced and abs(l_height - r_height) <=1 
 
-    left_sub_tree_balance = BalancedBTree(root.left_child)
-    right_sub_tree_balance = BalancedBTree(root.right_child)
-
-    if left_sub_tree_balance and right_sub_tree_balance == True:
-        return True
-root = insert(None,15)
-
-print(root.data)
-root= insert(None,15)
-insert(root,10)
-insert(root,25)
-insert(root,6)
-insert(root,14)
-insert(root,20)
-insert(root,60)
-
-print(height(root))
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        return check(root)[0]
