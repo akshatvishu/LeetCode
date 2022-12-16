@@ -23,7 +23,7 @@ class Solution:
         return low
                 
 """
-Suppose the pile has pile bananas and the eating speed is mid bananas per hour. The number of hours needed to eat all the bananas is pile/mid. However, this expression might not be an integer (for example, if pile=5 and mid=2, it would take 2.5 hours to eat all the bananas).
+Suppose the pile has `pile` bananas and the eating speed is `mid` bananas per hour. The number of hours needed to eat all the bananas is pile/mid. However, this expression might not be an integer (for example, if pile=5 and mid=2, it would take 2.5 hours to eat all the bananas).
 
 To handle this case, we can use integer division (//) to round the result down to the nearest integer. For example, 5//2 is equal to 2. The expression (pile+mid-1)//mid is equivalent to (pile/mid)+1, which rounds up instead of down. This ensures that the minimum number of hours needed to eat all the bananas in a pile is always at least 1.
 
