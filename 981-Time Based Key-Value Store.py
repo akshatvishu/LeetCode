@@ -32,11 +32,13 @@ class TimeMap:
         if values[left][0] <= timestamp:
             return values[left][1]
 
-        #  value at index left does not have a timestamp    less than or equal to the target timestamp.
+        # value at index left does not have a timestamp  
+        # less than or equal to the target timestamp.
         elif left > 0:
 
             """
-            if left is greater than 0. If it is, then the method returns the value at the previous index, because it is the most recent value with a timestamp less than or equal to the target timestamp that the method has encountered so far
+            if left is greater than 0. If it is, then the method returns the value at the previous index, 
+            because it is the most recent value with a timestamp less than or equal to the target timestamp that the method has encountered so far
             """
 
             return values[left-1][1]
