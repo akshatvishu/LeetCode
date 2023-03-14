@@ -1,4 +1,3 @@
-
 import heapq
 
 def MinCostToHireKWorker(quality, wage, K):
@@ -16,18 +15,23 @@ def MinCostToHireKWorker(quality, wage, K):
     heap = []
 
     for ratio, q in workers:
-        heapq.heappush(heap, -q)
+        heapq.heappush(heap, -q) #max heap
         sumq += q 
 
         if len(heap) > K:
+            #remove the worker with the highest quality from the heap 
+            # and subtract their quality from the sum of qualities.
 
             sumq += heapq.heappop(heap)
             
 
         if len(heap) == K:
+
             ans = min(ans, ratio*sumq)
         
     return ans
+
+# N log N
 
 
 
